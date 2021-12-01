@@ -16,11 +16,11 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 /* eslint-disable */
 
 @Component({
-  selector: 'jhi-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'jhi-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class ConfirmComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   formdata: any;
 
@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   onClickSubmit(data: any) {
     console.warn(data.name);
     console.warn(data);
-    this.router.navigate(['/confirm']);
   }
   onClickClear() {
     this.formdata = new FormGroup({
