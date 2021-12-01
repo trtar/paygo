@@ -8,6 +8,7 @@ import { Account } from 'app/core/auth/account.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedConfirmService } from 'app/shared/sharedconfirm.service';
 
 //import { AppointmentService } from './appointment.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,10 +24,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   formdata: any;
-
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private sharedService: SharedConfirmService) {}
 
   ngOnInit(): void {
     this.accountService
@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   onClickSubmit(data: any) {
     console.warn(data.name);
     console.warn(data);
-    this.router.navigate(['/confirm']);
+    this.router.navigate(['confirm']);
+    this.sharedService.setMessage(data.cik, data.ccc, data.amount, data.name, data.email, data.phone);
   }
   onClickClear() {
     this.formdata = new FormGroup({

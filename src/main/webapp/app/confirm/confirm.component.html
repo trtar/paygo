@@ -23,28 +23,26 @@
       </div>
     </div>
     <div class="col-md-11 info mx-auto pb-5">
-      <form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
-        <ul>
-          <li style="font-size: 19px" class="">Your credentials and payment amount</li>
-          <li>CIK*</li>
-          <li><input type="number" placeholder="123" name="cik" formControlName="cik" /></li>
-          <li>CCC*</li>
-          <li><input type="number" placeholder="123" name="ccc" formControlName="ccc" /></li>
-          <li>Payment Amount*</li>
-          <li><input type="number" placeholder="123" name="payAmount" formControlName="payAmount" /></li>
-          <li style="font-size: 19px" class="">Your Contact Information</li>
-          <li>Name*</li>
-          <li><input type="text" placeholder="your name" name="name" formControlName="name" /></li>
-          <li>Email*</li>
-          <li><input type="email" placeholder="test@gmail.com" name="email" formControlName="email" /></li>
-          <li>Phone Confirm*</li>
-          <li><input type="number" placeholder="0987654" name="phone" formControlName="phone" /></li>
-          <div class="row mx-auto">
-            <button class="mt-2 mr-4" (click)="onClickClear()">Clear</button>
-            <input type="submit" class="forsubmit btn btn-success ml-5 mt-2" value="Next" />
-          </div>
-        </ul>
-      </form>
+      <ul>
+        <li style="font-size: 19px" class="">Your credentials and payment amount</li>
+        <li class="pt-1">CIK*</li>
+        <li class="userinput pl-2">{{ message[0] }}</li>
+        <li class="pt-1">CCC*</li>
+        <li class="userinput pl-2">{{ message[1] }}</li>
+        <li class="pt-1">Payment Amount*</li>
+        <li class="userinput pl-2">{{ message[2] }}</li>
+        <li style="font-size: 19px" class="">Your Contact Information</li>
+        <li class="pt-1">Name*</li>
+        <li class="userinput pl-2">{{ message[3] }}</li>
+        <li class="pt-1">Email*</li>
+        <li class="userinput pl-2">{{ message[4] }}</li>
+        <li class="pt-1 pt-1">Phone*</li>
+        <li class="userinput pl-2">{{ message[5] }}</li>
+        <div class="row mx-auto pt-2">
+          <button class="mt-2 mr-4" routerLink="/">Back</button>
+          <input type="submit" class="forsubmit btn btn-success ml-5 mt-2" value="Proceed to Payment" />
+        </div>
+      </ul>
     </div>
   </div>
 </div>

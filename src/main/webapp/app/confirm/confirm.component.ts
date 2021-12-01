@@ -8,6 +8,7 @@ import { Account } from 'app/core/auth/account.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedConfirmService } from 'app/shared/sharedconfirm.service';
 
 //import { AppointmentService } from './appointment.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,19 +23,25 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ConfirmComponent implements OnInit, OnDestroy {
   account: Account | null = null;
+  message!: any[];
   formdata: any;
+  cik: any;
+  ccc: any;
+  payAmount: any;
+  name: any;
+  email: any;
+  phone: any;
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private sharedService: SharedConfirmService) {}
 
   ngOnInit(): void {
     this.accountService
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
-
-    this.onClickClear();
+    this.message = this.sharedService.getMessage();
   }
 
   login(): void {
