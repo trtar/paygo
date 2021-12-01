@@ -26,6 +26,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 
 import { HomeComponent } from './home/home.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,7 @@ import { HomeComponent } from './home/home.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, HomeComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, HomeComponent, ConfirmComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

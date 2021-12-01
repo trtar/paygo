@@ -1,0 +1,37 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+.hipster {
+  display: inline-block;
+  width: 347px;
+  height: 497px;
+  //background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
+  background-size: contain;
+}
+.background {
+  background-color: white;
+}
+p {
+  color: rgb(29, 29, 56);
+  font-size: 12px;
+}
+.submith3 {
+  color: rgb(29, 29, 56);
+}
+.enter {
+  background-color: rgb(11, 214, 214, 0.4);
+  font-size: 29px;
+}
+.penter {
+  font-size: 19px;
+}
+.info {
+  background-color: rgb(11, 214, 214, 0.1);
+}
+ul {
+  list-style-type: none;
+}
+li {
+  font-size: small;
+}
