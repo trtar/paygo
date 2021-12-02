@@ -40,9 +40,23 @@
         <li class="userinput pl-2">{{ message[5] }}</li>
         <div class="row mx-auto pt-2">
           <button class="mt-2 mr-4" routerLink="/">Back</button>
-          <input type="submit" class="forsubmit btn btn-success ml-5 mt-2" value="Proceed to Payment" />
+          <input type="submit" (click)="open(content)" class="forsubmit btn btn-success ml-5 mt-2" value="Proceed to Payment" />
         </div>
       </ul>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <div>
+      You are being redirected in <span class="font-weight-bold">{{ counter }} sec</span> to
+      <span class="font-weight-bold">http://Pay.Gov </span> to provide your payment and submit your payment. You will be returned to EDGAR
+      once you have submitted you payment on Pay.gov
+    </div>
+    <div class="mt-5">
+      <button class="btn btn-secondary">Cancel</button>
+      <button class="btn btn-success">Continue</button>
+    </div>
+  </div>
+</ng-template>

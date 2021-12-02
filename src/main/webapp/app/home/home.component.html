@@ -27,21 +27,41 @@
         <ul>
           <li style="font-size: 19px" class="">Your credentials and payment amount</li>
           <li>CIK*</li>
-          <li><input type="number" placeholder="123" name="cik" formControlName="cik" /></li>
+          <li>
+            <input
+              type="text"
+              maxlength="10"
+              (input)="inputValidato($event)"
+              placeholder="123"
+              name="cik"
+              formControlName="cik"
+              [(ngModel)]="mynumber"
+              (focusout)="format()"
+            />
+          </li>
+          <small class="error" *ngIf="cik.invalid && cik.touched">CIK is required</small>
+
           <li>CCC*</li>
-          <li><input type="number" placeholder="123" name="ccc" formControlName="ccc" /></li>
+          <li><input type="text" placeholder="123" name="ccc" formControlName="ccc" /></li>
+          <small class="error" *ngIf="ccc.invalid && ccc.touched">CCC is required</small>
           <li>Payment Amount*</li>
           <li><input type="number" placeholder="123" name="payAmount" formControlName="payAmount" /></li>
+          <small class="error" *ngIf="payAmount.invalid && payAmount.touched">Pay Amount is required</small>
           <li style="font-size: 19px" class="">Your Contact Information</li>
           <li>Name*</li>
           <li><input type="text" placeholder="your name" name="name" formControlName="name" /></li>
+          <small class="error" *ngIf="name.invalid && name.touched">name is required</small>
           <li>Email*</li>
           <li><input type="email" placeholder="test@gmail.com" name="email" formControlName="email" /></li>
+          <small class="error" *ngIf="email.invalid && email.touched">email is required</small>
           <li>Phone home*</li>
-          <li><input type="number" placeholder="0987654" name="phone" formControlName="phone" /></li>
+          <li>
+            <input type="text" maxlength="10" (input)="inputValidato($event)" placeholder="0987654" name="phone" formControlName="phone" />
+          </li>
+          <small class="error" *ngIf="phone.invalid && phone.touched">phone is required enter 10 digits</small>
           <div class="row mx-auto">
             <button class="mt-2 mr-4" (click)="onClickClear()">Clear</button>
-            <input class="forsubmit btn btn-success ml-5 mt-2" type="submit" value="Next" />
+            <input class="forsubmit btn btn-success ml-5 mt-2" type="submit" value="Next" [disabled]="formdata.invalid" />
           </div>
         </ul>
       </form>

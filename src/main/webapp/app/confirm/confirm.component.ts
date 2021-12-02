@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,10 +31,18 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   name: any;
   email: any;
   phone: any;
+  closeResult = 'close';
+
+  public counter: number = 10;
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router, private sharedService: SharedConfirmService) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private sharedService: SharedConfirmService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.accountService
@@ -44,8 +52,26 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.message = this.sharedService.getMessage();
   }
 
-  login(): void {
-    this.router.navigate(['/login']);
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+    this.startCountDown();
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   ngOnDestroy(): void {
@@ -54,7 +80,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   }
   onClickSubmit(data: any) {
     console.warn(data.name);
-    console.warn(data);
   }
   onClickClear() {
     this.formdata = new FormGroup({
@@ -65,6 +90,29 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       email: new FormControl(''),
       phone: new FormControl(),
     });
+  }
+  startCountDown() {
+    if (this.counter > 0) {
+      this.doCount();
+    } else {
+      console.warn('counter is: ', this.counter);
+    }
+  }
+  doCount() {
+    setTimeout(() => {
+      this.counter = this.counter - 1;
+      this.processCount();
+    }, 1000);
+  }
+  processCount() {
+    console.log('counter is: ', this.counter);
+    console.warn('counter is: ', this.counter);
+    if (this.counter == 0) {
+      console.warn('--counter end--');
+      //  this.counter = 10;
+    } else {
+      this.doCount();
+    }
   }
 }
 /* eslint-enable */

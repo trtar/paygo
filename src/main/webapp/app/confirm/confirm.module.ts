@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ConfirmComponent } from './confirm.component';

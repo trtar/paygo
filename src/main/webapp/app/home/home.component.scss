@@ -1,7 +1,19 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
+input.ng-valid {
+  border-left: 5px solid green;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+input.ng-invalid {
+  border: 1px solid rgb(138, 138, 138);
+}
+.error {
+  color: red;
+  background-color: white;
+}
 .hipster {
   display: inline-block;
   width: 347px;
@@ -34,4 +46,7 @@ ul {
 }
 li {
   font-size: small;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
