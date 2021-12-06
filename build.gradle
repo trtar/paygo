@@ -201,6 +201,8 @@ repositories {
 }
 
 dependencies {
+
+
     // import JHipster dependencies BOM
     if (!project.hasProperty("gae")) {
         implementation platform("tech.jhipster:jhipster-dependencies:${jhipsterDependenciesVersion}")
@@ -209,6 +211,7 @@ dependencies {
     // Use ", version: jhipsterDependenciesVersion, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
     implementation group: "tech.jhipster", name: "jhipster-framework"
+    implementation "com.worldline.payments:payment-api:4.6.0"
     implementation "javax.annotation:javax.annotation-api"
     implementation "io.dropwizard.metrics:metrics-core"
     implementation "io.micrometer:micrometer-registry-prometheus"
@@ -216,6 +219,12 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     implementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
+
+
+    implementation "com.ingenico.connect.gateway:connect-sdk-java:6.27.0"
+
+
+
     implementation "com.fasterxml.jackson.core:jackson-annotations"
     implementation "com.fasterxml.jackson.core:jackson-databind"
     implementation "org.hibernate:hibernate-core"
