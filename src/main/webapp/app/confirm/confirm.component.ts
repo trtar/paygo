@@ -13,7 +13,8 @@ import { SharedConfirmService } from 'app/shared/sharedconfirm.service';
 
 //import { AppointmentService } from './appointment.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-//import { Appointment } from './appointment';
+import { Confirm } from './confirm';
+import { ConfirmService } from './confirm.service';
 
 /* eslint-disable */
 
@@ -23,6 +24,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./confirm.component.scss'],
 })
 export class ConfirmComponent implements OnInit, OnDestroy {
+  appointment: Confirm = new Confirm();
   account: Account | null = null;
   message!: any[];
   formdata: any;
@@ -42,6 +44,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private router: Router,
+    private confirmService: ConfirmService,
     private sharedService: SharedConfirmService,
     private modalService: NgbModal,
     @Inject(DOCUMENT) private document: Document
@@ -53,6 +56,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
     this.message = this.sharedService.getMessage();
+    this.test();
   }
 
   open(content: any) {
@@ -126,6 +130,25 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   }
   goToUrl(): void {
     this.document.location.href = 'http://localhost:8080/to-be-redirected';
+  }
+  test() {
+    this.appointment.cik = '111111111';
+    this.appointment.ccc = '444444444444';
+    this.appointment.name = 'tariku';
+    this.appointment.email = '123';
+    this.appointment.phone = '2345';
+    console.warn(this.appointment);
+    this.saveAppointment();
+  }
+  saveAppointment() {
+    this.confirmService.createAppointment(this.appointment).subscribe(
+      data => {
+        console.warn('+++++++++++');
+        console.log(data);
+        console.warn(data);
+      },
+      error => console.log(error)
+    );
   }
 }
 /* eslint-enable */

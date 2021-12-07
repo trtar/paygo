@@ -1,0 +1,76 @@
+<div>
+  <h2 id="page-heading" data-cy="PaynowHeading">
+    <span>Paynows</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-paynow"
+        [routerLink]="['/paynow/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Paynow </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="paynows?.length === 0">
+    <span>No paynows found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="paynows && paynows.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Cik</span></th>
+          <th scope="col"><span>Ccc</span></th>
+          <th scope="col"><span>Name</span></th>
+          <th scope="col"><span>Email</span></th>
+          <th scope="col"><span>Phone</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paynow of paynows; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/paynow', paynow.id, 'view']">{{ paynow.id }}</a>
+          </td>
+          <td>{{ paynow.cik }}</td>
+          <td>{{ paynow.ccc }}</td>
+          <td>{{ paynow.name }}</td>
+          <td>{{ paynow.email }}</td>
+          <td>{{ paynow.phone }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/paynow', paynow.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/paynow', paynow.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(paynow)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
