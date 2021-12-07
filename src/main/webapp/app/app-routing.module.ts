@@ -31,6 +31,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
           path: 'login',
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
         },
+        { path: '', redirectTo: '/to-be-redirected', pathMatch: 'full' },
         {
           component: ConfirmComponent,
           path: 'confirm',

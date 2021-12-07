@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { Account } from 'app/core/auth/account.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 import { SharedConfirmService } from 'app/shared/sharedconfirm.service';
 
 //import { AppointmentService } from './appointment.service';
@@ -27,11 +28,12 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   formdata: any;
   cik: any;
   ccc: any;
-  payAmount: any;
+  paymount: any;
   name: any;
   email: any;
   phone: any;
   closeResult = 'close';
+  reDirection: any;
 
   public counter: number = 10;
 
@@ -41,7 +43,8 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router,
     private sharedService: SharedConfirmService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {
@@ -81,11 +84,15 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   onClickSubmit(data: any) {
     console.warn(data.name);
   }
+  onClickContinue() {
+    this.goToUrl();
+  }
+  onClickCancel() {}
   onClickClear() {
     this.formdata = new FormGroup({
       cik: new FormControl(),
       ccc: new FormControl(),
-      payAmount: new FormControl(),
+      paymount: new FormControl(),
       name: new FormControl(''),
       email: new FormControl(''),
       phone: new FormControl(),
@@ -108,11 +115,17 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     console.log('counter is: ', this.counter);
     console.warn('counter is: ', this.counter);
     if (this.counter == 0) {
+      //this.router.navigate(['/to-be-redirected']);
+      this.goToUrl();
+      this.sharedService.getRedirection();
       console.warn('--counter end--');
-      //  this.counter = 10;
+      //   this.counter = 10;
     } else {
       this.doCount();
     }
+  }
+  goToUrl(): void {
+    this.document.location.href = 'http://localhost:8080/to-be-redirected';
   }
 }
 /* eslint-enable */

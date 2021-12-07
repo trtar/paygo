@@ -11,6 +11,7 @@ import com.ingenico.connect.gateway.sdk.java.domain.definitions.AmountOfMoney;
 import com.ingenico.connect.gateway.sdk.java.domain.definitions.Card;
 import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.CreateHostedCheckoutRequest;
 import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.CreateHostedCheckoutResponse;
+import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.GetHostedCheckoutResponse;
 import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.definitions.HostedCheckoutSpecificInput;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.CreatePaymentRequest;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.CreatePaymentResponse;
@@ -78,6 +79,13 @@ public class HelloController {
         CreateHostedCheckoutResponse response = client.merchant("1426").hostedcheckouts().create(body);
         new_url = response.getPartialRedirectUrl();
 
+        System.out.println("_________________________" + new_url + " _____________________");
+        //GetHostedCheckoutResponse redirect_response = client.merchant("1426").hostedcheckouts().get("061ae5da-c58b-71ff-ba7d-9b8f43f6efc9");
+        // redirect_response.getStatus();
+        // System.out.println(redirect_response);
+        // System.out.println(redirect_response.getStatus());
+        //  System.out.println(redirect_response.getCreatedPaymentOutput().getPayment().getPaymentOutput());
+
         URL url = null;
         String new_path = null;
 
@@ -93,8 +101,7 @@ public class HelloController {
 
             // display the  Path
             System.out.println(" Path= " + new_path);
-        } // if any error occurs
-        catch (Exception e) {
+        } catch (Exception e) { // if any error occurs
             // display the error
             System.out.println(e);
         }
@@ -105,6 +112,7 @@ public class HelloController {
             .host("payment.pay1.sandbox.secured-by-ingenico.com")
             .path("/" + new_path)
             .buildAndExpand("junit-5");
+        System.out.println("???????????????????????" + uriComponents.toUriString() + "??????????????????");
 
         redirectView.setUrl(uriComponents.toUriString());
         return redirectView;

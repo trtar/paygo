@@ -69,7 +69,6 @@ public class PaygovApp {
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
         HelloController helloController = new HelloController();
-        helloController.redirect();
     }
 
     private static void logApplicationStartup(Environment env) {

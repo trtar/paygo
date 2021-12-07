@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.warn(data.name);
       console.warn(data);
       this.router.navigate(['confirm']);
-      this.sharedService.setMessage(data.cik, data.ccc, data.amount, data.name, data.email, data.phone);
+      this.sharedService.setMessage(data.cik, data.ccc, data.paymount, data.name, data.email, data.phone);
     } else {
       this.validateAllFormFields(this.formdata); //{7}
     }
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.formdata = new FormGroup({
       cik: new FormControl(null, Validators.compose([Validators.required])),
       ccc: new FormControl(null, Validators.required),
-      payAmount: new FormControl(null, Validators.required),
+      paymount: new FormControl(null, Validators.required),
       name: new FormControl('', Validators.required),
       email: new FormControl(null, Validators.compose([Validators.email, Validators.required])),
       phone: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(10)])),
@@ -78,8 +78,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   get ccc() {
     return this.formdata.get('ccc');
   }
-  get payAmount() {
-    return this.formdata.get('payAmount');
+  get paymount() {
+    return this.formdata.get('paymount');
   }
   get name() {
     return this.formdata.get('name');
