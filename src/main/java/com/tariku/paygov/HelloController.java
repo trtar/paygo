@@ -41,6 +41,7 @@ public class HelloController {
     File propertiesUrl = new File("/home/t/Documents/dev/paygo/src/main/resources/application.properties");
     CommunicatorConfiguration communicatorConfiguration = new CommunicatorConfiguration();
     Client client = Factory.createClient(propertiesUrl.toURI(), "e5ab0a54b4925c4d", "ggyepMGMiI46HKVUyyiV+c9xwgosOJSBFqoflKWbcVU=");
+    ReadUserData readUserData = new ReadUserData();
 
     @GetMapping("/hello")
     public String hello() {
@@ -49,15 +50,21 @@ public class HelloController {
 
     @RequestMapping("/to-be-redirected")
     public RedirectView payNow() {
+        System.out.println("[[[[[[[[ inside ]]]]]]]]]]]]]");
         RedirectView redirectView = new RedirectView();
+        System.out.println("[[[[[[[[ 1 ]]]]]]]]]]]]]");
 
         HostedCheckoutSpecificInput hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();
         hostedCheckoutSpecificInput.setLocale("en_GB");
         hostedCheckoutSpecificInput.setVariant("testVariant");
-        hostedCheckoutSpecificInput.setReturnUrl("http://localhost:8080/");
+        hostedCheckoutSpecificInput.setReturnUrl("http://localhost:8080/response");
+        System.out.println("[[[[[[[[ 2 ]]]]]]]]]]]]]");
+
+        String s_amount = readUserData.getData() + "00";
+        long l_amount = Long.parseLong(s_amount);
 
         AmountOfMoney amountOfMoney = new AmountOfMoney();
-        amountOfMoney.setAmount(2980L);
+        amountOfMoney.setAmount(l_amount);
         amountOfMoney.setCurrencyCode("EUR");
 
         Address billingAddress = new Address();
@@ -71,6 +78,7 @@ public class HelloController {
         Order order = new Order();
         order.setAmountOfMoney(amountOfMoney);
         order.setCustomer(customer);
+        System.out.println("[[[[[[[[ 3 ]]]]]]]]]]]]]");
 
         CreateHostedCheckoutRequest body = new CreateHostedCheckoutRequest();
         body.setHostedCheckoutSpecificInput(hostedCheckoutSpecificInput);

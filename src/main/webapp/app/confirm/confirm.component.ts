@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
@@ -24,6 +24,8 @@ import { ConfirmService } from './confirm.service';
   styleUrls: ['./confirm.component.scss'],
 })
 export class ConfirmComponent implements OnInit, OnDestroy {
+  data: any;
+  locaStorage: any;
   appointment: Confirm = new Confirm();
   account: Account | null = null;
   message!: any[];
@@ -56,7 +58,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
     this.message = this.sharedService.getMessage();
-    this.test();
+    //this.test();
   }
 
   open(content: any) {
@@ -85,13 +87,20 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
   onClickSubmit(data: any) {
     console.warn(data.name);
   }
-  onClickContinue() {
+
+  async onClickContinue() {
+    this.test();
+    await this.delay(1000);
+    this.setLocal();
     this.goToUrl();
   }
+
   onClickCancel() {}
+
   onClickClear() {
     this.formdata = new FormGroup({
       cik: new FormControl(),
@@ -115,33 +124,40 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       this.processCount();
     }, 1000);
   }
-  processCount() {
+
+  async processCount() {
     console.log('counter is: ', this.counter);
     console.warn('counter is: ', this.counter);
     if (this.counter == 0) {
-      //this.router.navigate(['/to-be-redirected']);
+      this.test();
+      await this.delay(1000);
+      this.setLocal();
       this.goToUrl();
-      this.sharedService.getRedirection();
+
+      // this.sharedService.getRedirection();
+
       console.warn('--counter end--');
       //   this.counter = 10;
     } else {
       this.doCount();
     }
   }
+
   goToUrl(): void {
     this.document.location.href = 'http://localhost:8080/to-be-redirected';
   }
   test() {
-    this.appointment.cik = '111111111';
-    this.appointment.ccc = '444444444444';
-    this.appointment.name = 'tariku';
-    this.appointment.email = '123';
-    this.appointment.phone = '2345';
+    this.appointment.cik = this.message[0];
+    this.appointment.ccc = this.message[2];
+    this.appointment.name = this.message[3];
+    this.appointment.email = this.message[4];
+    this.appointment.phone = this.message[5];
     console.warn(this.appointment);
     this.saveAppointment();
   }
   saveAppointment() {
-    this.confirmService.createAppointment(this.appointment).subscribe(
+    console.warn('!!!!!!!!!!!!!!!!! ' + this.data);
+    this.confirmService.createAppointmenttt().subscribe(
       data => {
         console.warn('+++++++++++');
         console.log(data);
@@ -149,6 +165,26 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       },
       error => console.log(error)
     );
+    console.warn('!!!!!!!!!!!!!!!!! ' + this.data);
+    this.confirmService.createAppointmentt(this.appointment).subscribe(
+      data => {
+        console.warn('+++++++++++');
+        console.log(data);
+        console.warn(data);
+      },
+      error => console.log(error)
+    );
+  }
+  setLocal() {
+    localStorage.setItem('cik', this.message[0]);
+    localStorage.setItem('ccc', this.message[1]);
+    localStorage.setItem('amount', this.message[2]);
+    localStorage.setItem('name', this.message[3]);
+    localStorage.setItem('email', this.message[4]);
+    localStorage.setItem('phone', this.message[5]);
+  }
+  async delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 /* eslint-enable */

@@ -1,0 +1,62 @@
+<div class="">
+  <div class="col-md-12 row">
+    <div class="col-md-1">
+      <img style="height: 85px; margin-right: 30px" class="rounded thumbnail img-responsive" src="../../content/images/logo.jpeg" alt="d" />
+    </div>
+    <div class="col-md-3 mt-3">
+      <div>US SECURITIES AND</div>
+      <div>EXCHANGE COMMISSION</div>
+    </div>
+  </div>
+
+  <div class="col-md-7 mx-auto">
+    <h3 class="display-5 font-weight-bold h3 submith3">Submit Payment</h3>
+
+    <p class="col-md-12 mx-auto">
+      To Submit an Sec filling free Freee payment using ACH, Credit or Debit Card enter the below information and click NEXT. You will
+      verify your CIK and contact information before selecting a payment type and entering your payment information
+    </p>
+
+    <div style="border: 2px rgb(76, 0, 255)" class="enter">
+      <div class="mx-auto col-md-12">
+        <p class="col-md-5 mx-auto penter py-3">Your Transaction is completed</p>
+      </div>
+    </div>
+    <div class="col-md-11 info mx-auto pb-5">
+      <ul>
+        <li style="font-size: 19px" class="">Your credentials and payment amount</li>
+        <li class="pt-1">CIK*</li>
+        <li class="userinput pl-2">{{ message[0] }} {{ cik }}</li>
+        <li class="pt-1">CCC*</li>
+        <li class="userinput pl-2">{{ message[1] }}{{ ccc }}</li>
+        <li class="pt-1">Payment Amount*</li>
+        <li class="userinput pl-2">{{ message[2] }}{{ amount }}</li>
+        <li style="font-size: 19px" class="">Your Contact Information</li>
+        <li class="pt-1">Name*</li>
+        <li class="userinput pl-2">{{ message[3] }}{{ name }}</li>
+        <li class="pt-1">Email*</li>
+        <li class="userinput pl-2">{{ message[4] }}{{ email }}</li>
+        <li class="pt-1 pt-1">Phone*</li>
+        <li class="userinput pl-2">{{ message[5] }}{{ phone }}</li>
+        <div class="row mx-auto pt-2">
+          <button class="mt-2 mr-4" routerLink="/">Back</button>
+          <input type="submit" (click)="open(content)" class="forsubmit btn btn-success ml-5 mt-2" value="Proceed to Payment" />
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <div>
+      You are being redirected in <span class="font-weight-bold">{{ counter }} sec</span> to
+      <span class="font-weight-bold">http://Pay.Gov </span> to provide your payment and submit your payment. You will be returned to EDGAR
+      once you have submitted you payment on Pay.gov
+    </div>
+    <div class="mt-5">
+      <button class="btn btn-secondary">Cancel</button>
+      <button (click)="onClickContinue()" class="btn btn-success">Continue</button>
+    </div>
+  </div>
+</ng-template>

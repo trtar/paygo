@@ -10,10 +10,19 @@ import { Confirm } from './confirm';
 export class ConfirmService {
   /* eslint-disable */
   private baseURL = 'api/paynows';
+  private helloURL = 'api/paynowss';
+  private helloURLL = 'api/paynowsss';
 
   constructor(private http: HttpClient) {}
 
   createAppointment(confirm: Confirm): Observable<any> {
     return this.http.post(`${this.baseURL}`, confirm);
+  }
+  createAppointmentt(confirm: Confirm): Observable<any> {
+    return this.http.post(`${this.helloURL}`, confirm);
+  }
+
+  createAppointmenttt(): Observable<any> {
+    return this.http.get(`${this.helloURLL}`);
   }
 }

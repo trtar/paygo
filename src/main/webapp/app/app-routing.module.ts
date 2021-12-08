@@ -8,6 +8,7 @@ import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ConfirmComponent } from './confirm';
+import { ResponseComponent } from './response';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
@@ -35,6 +36,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           component: ConfirmComponent,
           path: 'confirm',
+        },
+        {
+          component: ResponseComponent,
+          path: 'response',
         },
 
         ...LAYOUT_ROUTES,

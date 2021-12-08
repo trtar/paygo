@@ -1,5 +1,7 @@
 package com.tariku.paygov.web.rest;
 
+import com.tariku.paygov.HelloController;
+import com.tariku.paygov.ReadUserData;
 import com.tariku.paygov.domain.Paynow;
 import com.tariku.paygov.repository.PaynowRepository;
 import com.tariku.paygov.service.PaynowService;
@@ -49,6 +51,8 @@ public class PaynowResource {
      */
     @PostMapping("/paynows")
     public ResponseEntity<Paynow> createPaynow(@RequestBody Paynow paynow) throws URISyntaxException {
+        System.out.println("0000000000000000000000000 inside paynows 0000000000000000000");
+
         log.debug("REST request to save Paynow : {}", paynow);
         if (paynow.getId() != null) {
             throw new BadRequestAlertException("A new paynow cannot already have an ID", ENTITY_NAME, "idexists");
@@ -135,6 +139,7 @@ public class PaynowResource {
      */
     @GetMapping("/paynows")
     public List<Paynow> getAllPaynows() {
+        System.out.println("()()()()()()()()()()()()(We are inside get paynowss ");
         log.debug("REST request to get all Paynows");
         return paynowService.findAll();
     }
@@ -166,5 +171,25 @@ public class PaynowResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PostMapping("/paynowss")
+    public void createPaynw(@RequestBody Paynow paynow) throws URISyntaxException {
+        String cik = paynow.getCcc();
+        String ccc = paynow.getCcc();
+        String amount = paynow.getCcc();
+        String name = paynow.getName();
+        String email = paynow.getEmail();
+        String phone = paynow.getPhone();
+
+        ReadUserData readUserData = new ReadUserData();
+        readUserData.saveData(cik, ccc, amount, name, email, phone);
+        readUserData.getData();
+    }
+
+    @GetMapping("/paynowsss")
+    public String createPaynww(@RequestBody Paynow paynow) throws URISyntaxException {
+        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        return "here it is ";
     }
 }
