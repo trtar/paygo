@@ -15,6 +15,7 @@ import { SharedConfirmService } from 'app/shared/sharedconfirm.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Response } from './response';
 import { ResponseService } from './response.service';
+import { ConfirmService } from 'app/confirm/confirm.service';
 
 /* eslint-disable */
 
@@ -24,6 +25,8 @@ import { ResponseService } from './response.service';
   styleUrls: ['./response.component.scss'],
 })
 export class ResponseComponent implements OnInit, OnDestroy {
+  data: any;
+  transactionId: any;
   response: Response = new Response();
   account: Account | null = null;
   message!: any[];
@@ -45,6 +48,7 @@ export class ResponseComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private router: Router,
+    private confirmService: ConfirmService,
     private responseService: ResponseService,
     private sharedService: SharedConfirmService,
     private modalService: NgbModal,
@@ -57,6 +61,7 @@ export class ResponseComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
     //this.message = this.sharedService.getMessage();
+    this.saveAppointmentt();
     this.getLocal();
     this.test();
   }
@@ -159,6 +164,22 @@ export class ResponseComponent implements OnInit, OnDestroy {
     this.name = localStorage.getItem('name');
     this.email = localStorage.getItem('email');
     this.phone = localStorage.getItem('phone');
+  }
+  saveAppointmentt() {
+    console.warn('!!!!!!!cccccccccccc!!!!!!!cccc!!! ' + this.data);
+    this.confirmService.createAppointmenttt().subscribe(
+      data => {
+        console.warn('+++++cccccccccccccccc++++++');
+        console.log(data);
+        console.warn(data.transactionId + '=======that is it+++++++++++');
+        this.transactionId = data.transactionId;
+      },
+      error => console.log(error)
+    );
+    console.warn('!!!!!!!!!!!!!!!!! ' + this.data);
+  }
+  closeWindow() {
+    this.document.location.href = '';
   }
 }
 /* eslint-enable */

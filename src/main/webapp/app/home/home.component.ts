@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.warn(data);
       this.router.navigate(['confirm']);
       this.sharedService.setMessage(data.cik, data.ccc, data.paymount, data.name, data.email, data.phone);
+      localStorage.setItem('session', data.name);
     } else {
       this.validateAllFormFields(this.formdata); //{7}
     }

@@ -9,6 +9,7 @@ import { Authority } from 'app/config/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { ConfirmComponent } from './confirm';
 import { ResponseComponent } from './response';
+import { AuthGuard } from './auth.guard';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
@@ -34,6 +35,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         { path: '', redirectTo: '/to-be-redirected', pathMatch: 'full' },
         {
+          canActivate: [AuthGuard],
           component: ConfirmComponent,
           path: 'confirm',
         },

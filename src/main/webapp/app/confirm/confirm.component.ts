@@ -156,12 +156,12 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.saveAppointment();
   }
   saveAppointment() {
-    console.warn('!!!!!!!!!!!!!!!!! ' + this.data);
+    console.warn('!!!!!!!cccccccccccc!!!!!!!cccc!!! ' + this.data);
     this.confirmService.createAppointmenttt().subscribe(
       data => {
-        console.warn('+++++++++++');
+        console.warn('+++++cccccccccccccccc++++++');
         console.log(data);
-        console.warn(data);
+        console.warn(data.transactionId);
       },
       error => console.log(error)
     );

@@ -1,7 +1,10 @@
 package com.tariku.paygov.web.rest;
 
 import com.tariku.paygov.HelloController;
+import com.tariku.paygov.ReadReturnId;
 import com.tariku.paygov.ReadUserData;
+import com.tariku.paygov.ReturnId;
+import com.tariku.paygov.UserData;
 import com.tariku.paygov.domain.Paynow;
 import com.tariku.paygov.repository.PaynowRepository;
 import com.tariku.paygov.service.PaynowService;
@@ -26,6 +29,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class PaynowResource {
 
+    ReadReturnId readReturnId = new ReadReturnId();
     private final Logger log = LoggerFactory.getLogger(PaynowResource.class);
 
     private static final String ENTITY_NAME = "paynow";
@@ -188,8 +192,11 @@ public class PaynowResource {
     }
 
     @GetMapping("/paynowsss")
-    public String createPaynww(@RequestBody Paynow paynow) throws URISyntaxException {
-        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-        return "here it is ";
+    public ReturnId createPaynww() {
+        log.debug("REST request to get all Paynows");
+        ReturnId returnId = new ReturnId();
+        returnId.transactionId = this.readReturnId.getData();
+
+        return returnId;
     }
 }

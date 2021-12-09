@@ -27,6 +27,8 @@ import { ErrorComponent } from './layouts/error/error.component';
 
 import { HomeComponent } from './home/home.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   imports: [
@@ -46,6 +48,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
+    AuthService,
+    AuthGuard,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, HomeComponent, ConfirmComponent],
   bootstrap: [MainComponent],

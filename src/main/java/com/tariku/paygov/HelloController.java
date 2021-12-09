@@ -37,11 +37,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class HelloController {
 
     String new_url;
-
+    String new_checkout_id;
     File propertiesUrl = new File("/home/t/Documents/dev/paygo/src/main/resources/application.properties");
     CommunicatorConfiguration communicatorConfiguration = new CommunicatorConfiguration();
     Client client = Factory.createClient(propertiesUrl.toURI(), "e5ab0a54b4925c4d", "ggyepMGMiI46HKVUyyiV+c9xwgosOJSBFqoflKWbcVU=");
     ReadUserData readUserData = new ReadUserData();
+    ReadReturnId readReturnId = new ReadReturnId();
 
     @GetMapping("/hello")
     public String hello() {
@@ -86,6 +87,8 @@ public class HelloController {
 
         CreateHostedCheckoutResponse response = client.merchant("1426").hostedcheckouts().create(body);
         new_url = response.getPartialRedirectUrl();
+        new_checkout_id = response.getHostedCheckoutId();
+        this.readReturnId.saveData(new_checkout_id);
 
         System.out.println("_________________________" + new_url + " _____________________");
         //GetHostedCheckoutResponse redirect_response = client.merchant("1426").hostedcheckouts().get("061ae5da-c58b-71ff-ba7d-9b8f43f6efc9");

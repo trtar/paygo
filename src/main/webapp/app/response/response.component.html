@@ -23,40 +23,26 @@
       </div>
     </div>
     <div class="col-md-11 info mx-auto pb-5">
-      <ul>
-        <li style="font-size: 19px" class="">Your credentials and payment amount</li>
-        <li class="pt-1">CIK*</li>
-        <li class="userinput pl-2">{{ message[0] }} {{ cik }}</li>
-        <li class="pt-1">CCC*</li>
-        <li class="userinput pl-2">{{ message[1] }}{{ ccc }}</li>
-        <li class="pt-1">Payment Amount*</li>
-        <li class="userinput pl-2">{{ message[2] }}{{ amount }}</li>
-        <li style="font-size: 19px" class="">Your Contact Information</li>
-        <li class="pt-1">Name*</li>
-        <li class="userinput pl-2">{{ message[3] }}{{ name }}</li>
-        <li class="pt-1">Email*</li>
-        <li class="userinput pl-2">{{ message[4] }}{{ email }}</li>
-        <li class="pt-1 pt-1">Phone*</li>
-        <li class="userinput pl-2">{{ message[5] }}{{ phone }}</li>
-        <div class="row mx-auto pt-2">
-          <button class="mt-2 mr-4" routerLink="/">Back</button>
-          <input type="submit" (click)="open(content)" class="forsubmit btn btn-success ml-5 mt-2" value="Proceed to Payment" />
+      <div style="background-color: white; height: 380px" class="card col-md-8 mx-auto pt-90">
+        <h5 class="pt-2">Processing Payment</h5>
+
+        <p>The credit/debit card has been processed your transaction should be visible on EDGAR with in next 1f minuts</p>
+        <p class="pt-3">
+          Transaction ID : <span class="userinput pl-2">{{ transactionId }}</span>
+        </p>
+        <p class="">
+          Transaction Amount : <span class="userinput pl-2">{{ amount }}</span>
+        </p>
+        <div class="float-right" (click)="closeWindow()">
+          <button
+            (click)="closeWindow()"
+            style="background-color: rgb(100, 190, 190, 0.7); border: 1px white solid"
+            class="button float-right mr-5"
+          >
+            Close
+          </button>
         </div>
-      </ul>
+      </div>
     </div>
   </div>
 </div>
-
-<ng-template #content let-modal>
-  <div class="modal-body">
-    <div>
-      You are being redirected in <span class="font-weight-bold">{{ counter }} sec</span> to
-      <span class="font-weight-bold">http://Pay.Gov </span> to provide your payment and submit your payment. You will be returned to EDGAR
-      once you have submitted you payment on Pay.gov
-    </div>
-    <div class="mt-5">
-      <button class="btn btn-secondary">Cancel</button>
-      <button (click)="onClickContinue()" class="btn btn-success">Continue</button>
-    </div>
-  </div>
-</ng-template>
