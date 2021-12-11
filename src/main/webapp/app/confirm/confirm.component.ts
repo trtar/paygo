@@ -96,6 +96,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.test();
     await this.delay(1000);
     this.setLocal();
+    localStorage.removeItem('session');
     this.goToUrl();
   }
 
@@ -132,6 +133,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       this.test();
       await this.delay(1000);
       this.setLocal();
+      localStorage.removeItem('session');
       this.goToUrl();
 
       // this.sharedService.getRedirection();
