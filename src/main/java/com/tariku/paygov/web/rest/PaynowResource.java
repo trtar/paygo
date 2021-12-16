@@ -1,5 +1,12 @@
 package com.tariku.paygov.web.rest;
 
+import com.paypal.exception.ClientActionRequiredException;
+import com.paypal.exception.HttpErrorException;
+import com.paypal.exception.InvalidCredentialException;
+import com.paypal.exception.InvalidResponseDataException;
+import com.paypal.exception.MissingCredentialException;
+import com.paypal.exception.SSLConfigurationException;
+import com.paypal.sdk.exceptions.OAuthException;
 import com.tariku.paygov.HelloController;
 import com.tariku.paygov.ReadReturnId;
 import com.tariku.paygov.ReadUserData;
@@ -9,16 +16,19 @@ import com.tariku.paygov.domain.Paynow;
 import com.tariku.paygov.repository.PaynowRepository;
 import com.tariku.paygov.service.PaynowService;
 import com.tariku.paygov.web.rest.errors.BadRequestAlertException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.xml.parsers.ParserConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -195,7 +205,42 @@ public class PaynowResource {
     public ReturnId createPaynww() {
         log.debug("REST request to get all Paynows");
         ReturnId returnId = new ReturnId();
-        returnId.transactionId = this.readReturnId.getData();
+        try {
+            returnId.transactionId = readReturnId.getData();
+        } catch (ClientActionRequiredException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SSLConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (MissingCredentialException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (OAuthException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvalidResponseDataException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvalidCredentialException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (HttpErrorException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         return returnId;
     }

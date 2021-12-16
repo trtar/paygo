@@ -18,12 +18,20 @@ import com.ingenico.connect.gateway.sdk.java.domain.payment.CreatePaymentRespons
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.CardPaymentMethodSpecificInput;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Customer;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Order;
+import com.paypal.exception.*;
+import com.paypal.sdk.exceptions.OAuthException;
 import com.worldline.payments.api.PaymentHandler;
 import com.worldline.payments.api.PaymentRequest;
 import com.worldline.payments.api.PaymentRequestBuilder;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +40,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.xml.sax.SAXException;
+import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
+import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq;
+import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType;
+import urn.ebay.api.PayPalAPI.SetExpressCheckoutResponseType;
+import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
+import urn.ebay.apis.eBLBaseComponents.*;
 
 @RestController
 public class HelloController {
@@ -50,7 +65,8 @@ public class HelloController {
     }
 
     @RequestMapping("/to-be-redirected")
-    public RedirectView payNow() {
+    public RedirectView payNow()
+        throws ClientActionRequiredException, SSLConfigurationException, MissingCredentialException, OAuthException, InvalidResponseDataException, InvalidCredentialException, IOException, ParserConfigurationException, HttpErrorException, InterruptedException, SAXException {
         System.out.println("[[[[[[[[ inside ]]]]]]]]]]]]]");
         RedirectView redirectView = new RedirectView();
         System.out.println("[[[[[[[[ 1 ]]]]]]]]]]]]]");
@@ -60,36 +76,39 @@ public class HelloController {
         hostedCheckoutSpecificInput.setVariant("testVariant");
         hostedCheckoutSpecificInput.setReturnUrl("http://localhost:8080/response");
         System.out.println("[[[[[[[[ 2 ]]]]]]]]]]]]]");
+        ///===============================================================
+        String s_amount = readUserData.getData();
+        double d_amount = Double.parseDouble(s_amount);
+        PayPalSoap payPalSoap = new PayPalSoap();
+        ////==================================================================
+        // AmountOfMoney amountOfMoney = new AmountOfMoney();
+        // //amountOfMoney.setAmount(l_amount);
+        // amountOfMoney.setCurrencyCode("EUR");
 
-        String s_amount = readUserData.getData() + "00";
-        long l_amount = Long.parseLong(s_amount);
+        // Address billingAddress = new Address();
+        // billingAddress.setCountryCode("US");
 
-        AmountOfMoney amountOfMoney = new AmountOfMoney();
-        amountOfMoney.setAmount(l_amount);
-        amountOfMoney.setCurrencyCode("EUR");
+        // Customer customer = new Customer();
+        // customer.setLocale("en_US");
+        // customer.setMerchantCustomerId("1426");
+        // customer.setBillingAddress(billingAddress);
 
-        Address billingAddress = new Address();
-        billingAddress.setCountryCode("US");
+        // Order order = new Order();
+        // order.setAmountOfMoney(amountOfMoney);
+        // order.setCustomer(customer);
+        // System.out.println("[[[[[[[[ 3 ]]]]]]]]]]]]]");
 
-        Customer customer = new Customer();
-        customer.setLocale("en_US");
-        customer.setMerchantCustomerId("1426");
-        customer.setBillingAddress(billingAddress);
+        // CreateHostedCheckoutRequest body = new CreateHostedCheckoutRequest();
+        // body.setHostedCheckoutSpecificInput(hostedCheckoutSpecificInput);
+        // body.setOrder(order);
 
-        Order order = new Order();
-        order.setAmountOfMoney(amountOfMoney);
-        order.setCustomer(customer);
-        System.out.println("[[[[[[[[ 3 ]]]]]]]]]]]]]");
+        // CreateHostedCheckoutResponse response = client.merchant("1426").hostedcheckouts().create(body);
+        // new_url = response.getPartialRedirectUrl();
+        // new_checkout_id = response.getHostedCheckoutId();
+        String linkUrl = payPalSoap.payNowSoap(d_amount);
+        this.readReturnId.saveData(payPalSoap.token);
 
-        CreateHostedCheckoutRequest body = new CreateHostedCheckoutRequest();
-        body.setHostedCheckoutSpecificInput(hostedCheckoutSpecificInput);
-        body.setOrder(order);
-
-        CreateHostedCheckoutResponse response = client.merchant("1426").hostedcheckouts().create(body);
-        new_url = response.getPartialRedirectUrl();
-        new_checkout_id = response.getHostedCheckoutId();
-        this.readReturnId.saveData(new_checkout_id);
-
+        System.out.println("huuuuuuuuuuuuhhhhhuuuuuuuuhuuuuuuuuuuuuuhuuuuuuu " + payPalSoap.token + " ddddddd");
         System.out.println("_________________________" + new_url + " _____________________");
         //GetHostedCheckoutResponse redirect_response = client.merchant("1426").hostedcheckouts().get("061ae5da-c58b-71ff-ba7d-9b8f43f6efc9");
         // redirect_response.getStatus();
@@ -125,7 +144,8 @@ public class HelloController {
             .buildAndExpand("junit-5");
         System.out.println("???????????????????????" + uriComponents.toUriString() + "??????????????????");
 
-        redirectView.setUrl(uriComponents.toUriString());
+        /////===============================================
+        redirectView.setUrl(linkUrl);
         return redirectView;
     }
 }
