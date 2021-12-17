@@ -51,11 +51,11 @@ import urn.ebay.apis.eBLBaseComponents.*;
 @RestController
 public class HelloController {
 
+    public HelloController() {}
+
     String new_url;
     String new_checkout_id;
-    File propertiesUrl = new File("/home/t/Documents/dev/paygo/src/main/resources/application.properties");
     CommunicatorConfiguration communicatorConfiguration = new CommunicatorConfiguration();
-    Client client = Factory.createClient(propertiesUrl.toURI(), "e5ab0a54b4925c4d", "ggyepMGMiI46HKVUyyiV+c9xwgosOJSBFqoflKWbcVU=");
     ReadUserData readUserData = new ReadUserData();
     ReadReturnId readReturnId = new ReadReturnId();
 
