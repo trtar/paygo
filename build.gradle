@@ -222,6 +222,7 @@ dependencies {
 
 
     implementation "com.ingenico.connect.gateway:connect-sdk-java:6.27.0"
+    implementation "com.paypal.sdk:merchantsdk:2.15.122"
 
 
 

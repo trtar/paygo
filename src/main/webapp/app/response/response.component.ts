@@ -56,12 +56,12 @@ export class ResponseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.saveAppointmentt();
     this.accountService
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
     //this.message = this.sharedService.getMessage();
-    this.saveAppointmentt();
     this.getLocal();
     this.test();
   }
@@ -169,8 +169,6 @@ export class ResponseComponent implements OnInit, OnDestroy {
     console.warn('!!!!!!!cccccccccccc!!!!!!!cccc!!! ' + this.data);
     this.confirmService.createAppointmenttt().subscribe(
       data => {
-        console.warn('+++++cccccccccccccccc++++++');
-        console.log(data);
         console.warn(data.transactionId + '=======that is it+++++++++++');
         this.transactionId = data.transactionId;
       },
