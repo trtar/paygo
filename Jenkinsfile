@@ -4,7 +4,7 @@ pipeline {
 
     agent {
         docker {
-            image 'nodejhipster/jhipster'
+            image 'jhipster/jhipster'
             args '-u root'
         }
     }
