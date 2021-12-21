@@ -8,11 +8,11 @@ RUN adduser -D -s  /bin/sh jhipster
 WORKDIR /home/jhipster
 
 ADD entrypoint.sh entrypoint.sh
-RUN chmod 755 entrypoint.sh & chown jhipster:jhipster entrypoint.sh
+RUN chmod 755 entrypoint.sh && chown jhipster:jhipster entrypoint.sh
 
 USER=jhipster
 
 ENTRYPOINT ["./entrypoint.sh"]
 EXPOSE 8080
 
-ADD *.war app.w ar 
+ADD *.war app.war 

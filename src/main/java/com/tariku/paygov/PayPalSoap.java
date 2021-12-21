@@ -126,7 +126,7 @@ public class PayPalSoap {
         return getECResponse.getGetExpressCheckoutDetailsResponseDetails();
     }
 
-    public void doExpressResponse(GetExpressCheckoutDetailsResponseDetailsType getECResponse)
+    public String doExpressResponse(GetExpressCheckoutDetailsResponseDetailsType getECResponse)
         throws ClientActionRequiredException, SSLConfigurationException, MissingCredentialException, OAuthException, InvalidResponseDataException, InvalidCredentialException, IOException, ParserConfigurationException, HttpErrorException, InterruptedException, SAXException {
         System.out.println("rrr  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
 
@@ -168,7 +168,13 @@ public class PayPalSoap {
         //            TempData["TransactionResult"] = "Transaction ID:" + doECResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID + Environment.NewLine + "Payment status" + doECResponse.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].PaymentStatus.Value.ToString();
         //            return RedirectToAction("SaveCustomer", "SignupOrLogin");
         //        }
+        DoExpressCheckoutPaymentResponseDetailsType details = doECResponse.getDoExpressCheckoutPaymentResponseDetails();
+        List<PaymentInfoType> paymentsList = details.getPaymentInfo();
+        PaymentInfoType info = paymentsList.get(0);
+        String soapTransactionID = info.getTransactionID();
+        System.out.println("Transaction Id" + info.getTransactionID() + "kkkkkk");
 
         System.out.println("rrr " + doECResponse.getAck() + " rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+        return soapTransactionID;
     }
 }

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,6 +106,8 @@ public class HelloController {
         // CreateHostedCheckoutResponse response = client.merchant("1426").hostedcheckouts().create(body);
         // new_url = response.getPartialRedirectUrl();
         // new_checkout_id = response.getHostedCheckoutId();
+        //TimeUnit.SECONDS.sleep(10);
+
         String linkUrl = payPalSoap.payNowSoap(d_amount);
         this.readReturnId.saveData(payPalSoap.token);
 

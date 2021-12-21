@@ -131,7 +131,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     console.warn('counter is: ', this.counter);
     if (this.counter == 0) {
       this.test();
-      await this.delay(1000);
+      // await this.delay(1000);
       this.setLocal();
       localStorage.removeItem('session');
       this.goToUrl();
