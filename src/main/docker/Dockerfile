@@ -2,7 +2,7 @@ FROM openjdk:17-jre-slim-stretch
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 JHIPSTER_SLEEP=0 \
-JAVA_OPTS=""
+JAVA_OPTS=""    
 
 RUN adduser -D -s  /bin/sh jhipster
 WORKDIR /home/jhipster
@@ -15,4 +15,4 @@ USER=jhipster
 ENTRYPOINT ["./entrypoint.sh"]
 EXPOSE 8080
 
-ADD *.war app.war 
+ADD *.warapp.war 
