@@ -5,7 +5,7 @@ node {
         checkout scm
     }
 
-    docker.image('jhipster/jhipster:v7.3.1').inside('-u jhipster -e GRADLE_USER_HOME=.gradle') {
+ 
         stage('check java') {
             sh "java -version"
         }
@@ -50,7 +50,7 @@ node {
             sh "./gradlew deployHeroku --no-daemon"
         }
 
-    }
+    
 
     def dockerImage
     stage('publish docker') {
