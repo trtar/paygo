@@ -26,18 +26,25 @@ node {
        
 
         stage('packaging') {
-            sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
+            sh "./gradlew -Pprod bootJar jibDockerBuild --no-daemon"
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
-        }	
+        }
+        stage('build') {
+            sh "sudo docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
+        }
+        
+        stage('commit') {
+            sh "sudo docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
+        }
+        stage('push') {
+            sh "sudo docker push tarewmichael/paygov_1 --no-daemon"
+        }
+        	
+        	
 
        
 
     
 
-    def dockerImage
-    stage('publish docker') {
-        // A pre-requisite to this step is to setup authentication to the docker registry
-        // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#authentication-methods
-        sh "./gradlew bootJar jib -Pprod -PnodeInstall --no-daemon"
-    }
+   
 }
