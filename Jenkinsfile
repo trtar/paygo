@@ -28,11 +28,9 @@ node {
         stage('packaging') {
             sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
-        }
+        }	
 
-        stage('deployment') {
-            sh "./gradlew deployHeroku --no-daemon"
-        }
+       
 
     
 
