@@ -30,21 +30,13 @@ node {
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
         }
         stage('build') {
-            sh "sudo docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
+            sh "docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
         }
         
         stage('commit') {
-            sh "sudo docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
+            sh "docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
         }
         stage('push') {
-            sh "sudo docker push tarewmichael/paygov_1 --no-daemon"
+            sh "docker push tarewmichael/paygov_1 --no-daemon"
         }
-        	
-        	
-
-       
-
-    
-
-   
 }
