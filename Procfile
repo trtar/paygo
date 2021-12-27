@@ -1,1 +1,1 @@
-web: java -jar target/paygov-0.0.1-SNAPSHOT.jar
+web: ./gradlew
