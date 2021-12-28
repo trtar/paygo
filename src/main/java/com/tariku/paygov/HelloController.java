@@ -53,6 +53,8 @@ public class HelloController {
 
     public HelloController() {}
 
+    double d_amount;
+    String s_amount;
     String new_url;
     String new_checkout_id;
     CommunicatorConfiguration communicatorConfiguration = new CommunicatorConfiguration();
@@ -77,9 +79,14 @@ public class HelloController {
         hostedCheckoutSpecificInput.setReturnUrl("http://localhost:8080/response");
         System.out.println("[[[[[[[[ 2 ]]]]]]]]]]]]]");
         ///===============================================================
-        String s_amount = readUserData.getData();
-        double d_amount = Double.parseDouble(s_amount);
+        try {
+            s_amount = readUserData.getData();
+            d_amount = Double.parseDouble(s_amount);
+        } catch (Exception e) {
+            System.out.println("[[[[[[[[ this is the error ]]]]]]]]]]]]]");
+        }
         PayPalSoap payPalSoap = new PayPalSoap();
+
         ////==================================================================
         // AmountOfMoney amountOfMoney = new AmountOfMoney();
         // //amountOfMoney.setAmount(l_amount);
@@ -106,6 +113,8 @@ public class HelloController {
         // new_url = response.getPartialRedirectUrl();
         // new_checkout_id = response.getHostedCheckoutId();
         String linkUrl = payPalSoap.payNowSoap(d_amount);
+        System.out.println("huuuuuuuuuuuuhhhhhuuuuuuuuhuuuuuuuuuuuuuhuuuuuuu 1 ");
+
         this.readReturnId.saveData(payPalSoap.token);
 
         System.out.println("huuuuuuuuuuuuhhhhhuuuuuuuuhuuuuuuuuuuuuuhuuuuuuu " + payPalSoap.token + " ddddddd");

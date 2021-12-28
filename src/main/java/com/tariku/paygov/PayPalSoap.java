@@ -58,12 +58,23 @@ public class PayPalSoap {
         sdkConfig.put("acct1.UserName", "tolosah929_api1.gmail.com");
         sdkConfig.put("acct1.Password", "ZNKHJBXNVL9C4NXJ");
         sdkConfig.put("acct1.Signature", "AjWsTWPqZToOVKDUNiak1LHwFCOzARvVOfBKZ.xHzrhFJyig03ibDX1S");
+        System.out.println("tttttttttt sdkConfig" + sdkConfig.toString() + " " + sdkConfig.values());
+
         PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(sdkConfig);
+        System.out.println(
+            "tttttttttt    setExpressCheckoutReq " +
+            setExpressCheckoutReq.toString() +
+            " " +
+            setExpressCheckoutReq.getSetExpressCheckoutRequest()
+        );
         SetExpressCheckoutResponseType setExpressCheckoutResponse = service.setExpressCheckout(setExpressCheckoutReq);
+        System.out.println(
+            "ttttttttt service" + service.toString() + " " + service.getLastRequest() + " " + service.getLastResponse() + " tttt"
+        );
 
         token = setExpressCheckoutResponse.getToken();
         String name = setExpressCheckoutResponse.getVersion();
-        System.out.println(token + " uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu " + name + " ddd");
+        System.out.println(token + " uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu " + name + " ddd" + setExpressCheckoutResponse.getAck());
 
         String link = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=" + token;
         System.out.println(link);
@@ -99,7 +110,6 @@ public class PayPalSoap {
         sdkConfig.put("acct1.Password", "ZNKHJBXNVL9C4NXJ");
         sdkConfig.put("acct1.Signature", "AjWsTWPqZToOVKDUNiak1LHwFCOzARvVOfBKZ.xHzrhFJyig03ibDX1S");
         PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(sdkConfig);
-
         GetExpressCheckoutDetailsReq getECWrapper = new GetExpressCheckoutDetailsReq();
         // (Required) A timestamped token, the value of which was returned by SetExpressCheckout response.
         // Character length and limitations: 20 single-byte characters
