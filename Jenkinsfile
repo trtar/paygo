@@ -30,7 +30,7 @@ node {
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
         }
         stage('push') {
-            sh "git push heroku tariku"
+            sh "git push heroku main"
         }
         
    
