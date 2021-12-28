@@ -29,16 +29,11 @@ node {
             sh "./gradlew -Pprod bootJar jibDockerBuild --no-daemon"
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
         }
-        stage('build') {
-            sh "docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
+        stage('push') {
+            sh "git push heroku tariku"
         }
         
-        stage('commit') {
-            sh "docker tag 4f0e0e07a484 tarewmichael/paygov_1 --no-daemon"
-        }
-        stage('push') {
-            sh "docker push tarewmichael/paygov_1 --no-daemon"
-        }
+        
         	
         	
 
