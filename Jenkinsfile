@@ -28,7 +28,7 @@ node {
     }
 
     stage('deployment') {
-        sh "sudo ./gradlew deployHeroku --no-daemon"
+        sh "./gradlew deployHeroku --no-daemon"
     }
 
 }
