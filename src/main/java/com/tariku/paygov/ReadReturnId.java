@@ -1,10 +1,19 @@
 package com.tariku.paygov;
 
+import com.paypal.exception.ClientActionRequiredException;
+import com.paypal.exception.HttpErrorException;
+import com.paypal.exception.InvalidCredentialException;
+import com.paypal.exception.InvalidResponseDataException;
+import com.paypal.exception.MissingCredentialException;
+import com.paypal.exception.SSLConfigurationException;
+import com.paypal.sdk.exceptions.OAuthException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 public class ReadReturnId {
 
@@ -25,7 +34,8 @@ public class ReadReturnId {
         }
     }
 
-    public String getData() {
+    public String getData()
+        throws ClientActionRequiredException, SSLConfigurationException, MissingCredentialException, OAuthException, InvalidResponseDataException, InvalidCredentialException, HttpErrorException, IOException, ParserConfigurationException, InterruptedException, SAXException {
         String trasactionId = "";
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(filename));
@@ -40,6 +50,10 @@ public class ReadReturnId {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        PayPalSoap payPalSoap = new PayPalSoap();
+        payPalSoap.getExpressResponse2(trasactionId);
+        payPalSoap.doExpressResponse(payPalSoap.getExpressResponse2(trasactionId));
 
         return trasactionId;
     }

@@ -1,0 +1,18 @@
+services:
+  paygov:
+    image: paygov
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://paygov-postgresql:5432/paygov
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://paygov-postgresql:5432/paygov
+      - JHIPSTER_SLEEP=30
+    ports:
+      - '8080:8080'
+  paygov-postgresql:
+    image: postgres:13.4
+    environment:
+      - POSTGRES_USER=paygov
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
