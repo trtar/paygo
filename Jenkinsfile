@@ -8,6 +8,9 @@ node {
     stage('check java') {
         sh "java -version"
     }
+    stage('deployment') {
+        sh "./gradlew deployHeroku --no-daemon"
+    }
 
     stage('clean') {
         sh "chmod +x gradlew"
@@ -27,8 +30,6 @@ node {
         archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
 
-    stage('deployment') {
-        sh "./gradlew deployHeroku --no-daemon"
-    }
+    
 
 }
