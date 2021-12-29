@@ -42,6 +42,9 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "enableGradleEnterprise": false,
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "herokuAppName": "stormy-sands-56815",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "17"
   }
 }

@@ -33,13 +33,5 @@ node {
             sh "git push heroku tariku"
         }
         
-        
-        	
-        	
-
-       
-
-    
-
    
 }
