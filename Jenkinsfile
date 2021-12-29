@@ -30,7 +30,7 @@ node {
             archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
         }
         stage('push') {
-            sh "git remote show heroku"
+            sh "./gradlew deployHeroku --no-daemon"
         }
         
    
