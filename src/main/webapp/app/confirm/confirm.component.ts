@@ -146,7 +146,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
   }
 
   goToUrl(): void {
-    this.document.location.href = 'http://localhost:8080/to-be-redirected';
+    this.document.location.href = 'https://stormy-sands-56815.herokuapp.com/to-be-redirected';
   }
   test() {
     this.appointment.cik = this.message[0];

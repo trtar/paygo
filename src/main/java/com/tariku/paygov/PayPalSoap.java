@@ -42,8 +42,8 @@ public class PayPalSoap {
         paymentDetailsList.add(paymentDetails);
 
         SetExpressCheckoutRequestDetailsType setExpressCheckoutRequestDetails = new SetExpressCheckoutRequestDetailsType();
-        setExpressCheckoutRequestDetails.setReturnURL("http://localhost:8080/response");
-        setExpressCheckoutRequestDetails.setCancelURL("http://localhost:8080/");
+        setExpressCheckoutRequestDetails.setReturnURL("https://stormy-sands-56815.herokuapp.com/response");
+        setExpressCheckoutRequestDetails.setCancelURL("https://stormy-sands-56815.herokuapp.com/");
 
         setExpressCheckoutRequestDetails.setPaymentDetails(paymentDetailsList);
 

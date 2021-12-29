@@ -29,6 +29,6 @@ export class SharedConfirmService {
     return new Array(this.cik, this.ccc, this.paymount, this.name, this.email, this.phone);
   }
   getRedirection() {
-    this.httpClient.get('http://localhost:8080/to-be-redirected');
+    this.httpClient.get('https://stormy-sands-56815.herokuapp.com/to-be-redirected');
   }
 }
