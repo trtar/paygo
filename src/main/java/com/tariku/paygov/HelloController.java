@@ -58,7 +58,7 @@ public class HelloController {
         HostedCheckoutSpecificInput hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();
         hostedCheckoutSpecificInput.setLocale("en_GB");
         hostedCheckoutSpecificInput.setVariant("testVariant");
-        hostedCheckoutSpecificInput.setReturnUrl("http://localhost:8080/response");
+        hostedCheckoutSpecificInput.setReturnUrl("https://stormy-sands-56815.herokuapp.com/response");
         System.out.println("[[[[[[[[ 2 ]]]]]]]]]]]]]");
 
         String s_amount = readUserData.getData() + "00";
