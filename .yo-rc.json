@@ -41,6 +41,7 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
+    "herokuApiKey": "23a2ea48-7821-4d1a-95e3-d5472923de6f",
     "enableGradleEnterprise": false,
     "languages": ["en", "fr"],
     "herokuAppName": "stormy-sands-56815",
