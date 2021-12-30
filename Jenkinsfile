@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 
 node {
-      env.HEROKU_API_KEY: '23a2ea48-7821-4d1a-95e3-d5472923de6f',
 
 
     stage('checkout') {
