@@ -11,7 +11,10 @@ node {
         sh "java -version"
     }
     stage('deployment') {
-        withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+        withCredentials([
+                 string(credentialsId: ‘HEROKU_API_KEY’, variable: ‘HEROKU_API_KEY’),
+                 string(credentialsId: ‘HEROKU_APP_NAME’, variable: ‘HEROKU_APP_NAME’),
+             ]){
 
         sh "./gradlew deployHeroku --no-daemon"
      }
